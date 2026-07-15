@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.env
+data/raw/
+data/interim/
+artifacts/
+mlruns/
+wandb/
+*.wav
+*.mp3
+*.m4a
+*.mp4
+STRUCTURE.md
