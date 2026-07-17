@@ -13,6 +13,9 @@ wandb/
 *.mp4
 STRUCTURE.md
 
+tests/__pycache__
+tests/evaluation/__pycache__
+
 # Local datasets and generated evaluation data
 data/external/
 data/raw/
