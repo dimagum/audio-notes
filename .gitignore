@@ -1,0 +1,28 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.env
+data/raw/
+data/interim/
+artifacts/
+mlruns/
+wandb/
+*.wav
+*.mp3
+*.m4a
+*.mp4
+STRUCTURE.md
+
+# Local datasets and generated evaluation data
+data/external/
+data/raw/
+data/interim/
+data/processed/eval/asr_test/
+data/processed/eval/notes_test/
+data/processed/datasets
+
+
+# Keep only manifests and documentation in Git
+!data/processed/eval/
+!data/processed/eval/*.jsonl
+!data/processed/eval/*.md
