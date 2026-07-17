@@ -12,6 +12,17 @@ wandb/
 *.m4a
 *.mp4
 STRUCTURE.md
-data/external/golos_ru
-data/external/mtedx_ru
-data/external/common_voice_ru
+
+# Local datasets and generated evaluation data
+data/external/
+data/raw/
+data/interim/
+data/processed/eval/asr_test/
+data/processed/eval/notes_test/
+data/processed/datasets
+
+
+# Keep only manifests and documentation in Git
+!data/processed/eval/
+!data/processed/eval/*.jsonl
+!data/processed/eval/*.md
