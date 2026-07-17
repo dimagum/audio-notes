@@ -9,15 +9,21 @@ from audio_notes.evaluation.normalization import normalize_for_asr
 
 @dataclass(frozen=True)
 class AsrMetrics:
-    """ASR quality metrics for a single reference-hypothesis pair."""
-
     wer: float
     cer: float
+
     substitutions: int
     deletions: int
     insertions: int
+
+    character_substitutions: int
+    character_deletions: int
+    character_insertions: int
+
     reference_word_count: int
     hypothesis_word_count: int
+    reference_character_count: int
+    hypothesis_character_count: int
 
 
 def calculate_asr_metrics(reference: str, hypothesis: str) -> AsrMetrics:
@@ -42,4 +48,9 @@ def calculate_asr_metrics(reference: str, hypothesis: str) -> AsrMetrics:
         insertions=word_output.insertions,
         reference_word_count=len(normalized_reference.split()),
         hypothesis_word_count=len(normalized_hypothesis.split()),
+        character_substitutions=character_output.substitutions,
+        character_deletions=character_output.deletions,
+        character_insertions=character_output.insertions,
+        reference_character_count=len(normalized_reference),
+        hypothesis_character_count=len(normalized_hypothesis),
     )

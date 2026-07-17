@@ -85,8 +85,13 @@ def test_asr_sample_result_accepts_valid_data() -> None:
             "substitutions": 0,
             "deletions": 0,
             "insertions": 0,
+            "character_substitutions": 0,
+            "character_deletions": 0,
+            "character_insertions": 0,
             "reference_word_count": 3,
             "hypothesis_word_count": 3,
+            "reference_character_count": 23,
+            "hypothesis_character_count": 23,
             "error": None,
         }
     )
@@ -108,6 +113,11 @@ def test_asr_sample_result_accepts_valid_data() -> None:
         ("insertions", -1),
         ("reference_word_count", -1),
         ("hypothesis_word_count", -1),
+        ("character_substitutions", -1),
+        ("character_deletions", -1),
+        ("character_insertions", -1),
+        ("reference_character_count", -1),
+        ("hypothesis_character_count", -1),
     ],
 )
 def test_asr_sample_result_rejects_invalid_metrics(
@@ -129,6 +139,11 @@ def test_asr_sample_result_rejects_invalid_metrics(
         "insertions": 0,
         "reference_word_count": 1,
         "hypothesis_word_count": 1,
+        "character_substitutions": 0,
+        "character_deletions": 0,
+        "character_insertions": 0,
+        "reference_character_count": 10,
+        "hypothesis_character_count": 10,
         "error": None,
     }
     payload[field_name] = invalid_value

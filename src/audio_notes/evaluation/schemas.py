@@ -41,6 +41,13 @@ class AsrSampleResult(BaseModel):
     reference_word_count: int = Field(ge=0)
     hypothesis_word_count: int = Field(ge=0)
 
+    character_substitutions: int = Field(ge=0)
+    character_deletions: int = Field(ge=0)
+    character_insertions: int = Field(ge=0)
+
+    reference_character_count: int = Field(ge=0)
+    hypothesis_character_count: int = Field(ge=0)
+
     error: str | None = None
 
 
