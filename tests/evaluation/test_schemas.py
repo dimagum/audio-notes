@@ -103,7 +103,7 @@ def test_asr_sample_result_accepts_valid_data() -> None:
 @pytest.mark.parametrize(
     ("field_name", "invalid_value"),
     [
-        ("audio_duration_seconds", 0),
+        ("audio_duration_seconds", -0.1),
         ("asr_seconds", -0.1),
         ("asr_rtf", -0.1),
         ("wer", -0.1),

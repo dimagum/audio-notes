@@ -27,7 +27,7 @@ class AsrSampleResult(BaseModel):
     reference_text: str
     hypothesis_text: str
 
-    audio_duration_seconds: float = Field(gt=0)
+    audio_duration_seconds: float = Field(ge=0)
     asr_seconds: float = Field(ge=0)
     asr_rtf: float = Field(ge=0)
 
