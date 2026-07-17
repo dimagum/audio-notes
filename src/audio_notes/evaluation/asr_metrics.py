@@ -1,21 +1,45 @@
 from __future__ import annotations
 
-import re
+from dataclasses import dataclass
 
-from jiwer import cer, wer
+import jiwer
 
-
-def normalize_text(text: str) -> str:
-    text = text.lower().replace("ё", "е")
-    text = re.sub(r"[^\w\s]", " ", text, flags=re.UNICODE)
-    return " ".join(text.split())
+from audio_notes.evaluation.normalization import normalize_for_asr
 
 
-def calculate_asr_metrics(reference: str, hypothesis: str) -> dict[str, float]:
-    reference = normalize_text(reference)
-    hypothesis = normalize_text(hypothesis)
+@dataclass(frozen=True)
+class AsrMetrics:
+    """ASR quality metrics for a single reference-hypothesis pair."""
 
-    return {
-        "wer": wer(reference, hypothesis),
-        "cer": cer(reference, hypothesis),
-    }
+    wer: float
+    cer: float
+    substitutions: int
+    deletions: int
+    insertions: int
+    reference_word_count: int
+    hypothesis_word_count: int
+
+
+def calculate_asr_metrics(reference: str, hypothesis: str) -> AsrMetrics:
+    """Calculates normalized WER/CER and edit operations for one ASR output."""
+    normalized_reference = normalize_for_asr(reference)
+    normalized_hypothesis = normalize_for_asr(hypothesis)
+
+    word_output = jiwer.process_words(
+        normalized_reference,
+        normalized_hypothesis,
+    )
+    character_output = jiwer.process_characters(
+        normalized_reference,
+        normalized_hypothesis,
+    )
+
+    return AsrMetrics(
+        wer=word_output.wer,
+        cer=character_output.cer,
+        substitutions=word_output.substitutions,
+        deletions=word_output.deletions,
+        insertions=word_output.insertions,
+        reference_word_count=len(normalized_reference.split()),
+        hypothesis_word_count=len(normalized_hypothesis.split()),
+    )
