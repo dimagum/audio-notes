@@ -1,0 +1,7 @@
+{
+  "id": "mtedx_001",
+  "audio_path": ".../talk_001.wav",
+  "reference_transcript_path": ".../talk_001.txt",
+  "reference_notes_path": ".../talk_001.md",
+  "domain": "general"
+}

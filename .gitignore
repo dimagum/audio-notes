@@ -12,3 +12,6 @@ wandb/
 *.m4a
 *.mp4
 STRUCTURE.md
+data/external/golos_ru
+data/external/mtedx_ru
+data/external/common_voice_ru
