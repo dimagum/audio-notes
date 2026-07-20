@@ -14,7 +14,7 @@ class FasterWhisperTranscriber:
         *,
         device: str = "cuda",
         compute_type: str = "float16",
-        language: str = "ru",
+        language: str | None = "ru",
         beam_size: int = 5,
         vad_filter: bool = False,
     ) -> None:
