@@ -3,6 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
+from audio_notes.notes.schemas import GeneratedNote
 
 
 class AsrManifestRecord(BaseModel):
@@ -119,3 +120,27 @@ class NotesManifestRecord(BaseModel):
             )
 
         return self
+
+
+class NotesSampleResult(BaseModel):
+    """Generation result for one notes evaluation record."""
+
+    id: str = Field(min_length=1)
+    source: str = Field(min_length=1)
+    split: str = Field(min_length=1)
+    domain: str = Field(min_length=1)
+
+    reference_text: str = Field(min_length=1)
+    generated_note: GeneratedNote | None = None
+
+    generation_seconds: float = Field(ge=0)
+    error: str | None = None
+
+
+class NotesEvaluationSummary(BaseModel):
+    """Summary of one notes-generation evaluation run."""
+
+    n_total: int = Field(gt=0)
+    n_success: int = Field(ge=0)
+    n_failed: int = Field(ge=0)
+    generation_seconds_total: float = Field(ge=0)
