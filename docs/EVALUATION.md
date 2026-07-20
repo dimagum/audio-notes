@@ -26,3 +26,19 @@
 - Beam size: `5`
 - VAD filter: `false`
 - Dataset: fixed `asr_test_manifest.jsonl`, 300 Common Voice Russian test samples
+
+## Error Analysis: large-v3-turbo
+
+Reviewed 15 samples with the highest per-sample WER.
+
+Observed error categories:
+- Phonetic substitutions in short utterances and rare words/proper names.
+- Word-boundary changes: merged and split tokens.
+- Equivalent number representation: words versus digits.
+- Morphological substitutions.
+- Errors in rare words and inflected forms.
+
+Decision:
+- Keep the current strict normalization as the primary reproducible benchmark.
+- Do not normalize numbers, abbreviations, or split/merged words in v1.
+- Evaluate domain-specific technical terminology separately before fine-tuning.
