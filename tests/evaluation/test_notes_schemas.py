@@ -28,10 +28,10 @@ def make_payload() -> dict[str, object]:
             "Первый фрагмент выступления. "
             "Второй фрагмент выступления."
         ),
-        "summary": (
-            "Спикер представил основную тему "
-            "и обозначил дальнейший контекст."
-        ),
+        # "summary": (
+        #     "Спикер представил основную тему "
+        #     "и обозначил дальнейший контекст."
+        # ),
         "segments": [
             make_segment(),
         ],
@@ -86,7 +86,8 @@ def test_notes_manifest_record_accepts_valid_data() -> None:
 
     assert record.id == "record_001"
     assert record.n_segments == 1
-    assert record.summary.startswith("Спикер")
+    # assert record.summary.startswith("Спикер")
+    assert record.segments[0].text == "Первый фрагмент выступления."
 
 
 def test_notes_manifest_record_rejects_wrong_segment_count() -> None:

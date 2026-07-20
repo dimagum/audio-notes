@@ -96,7 +96,7 @@ class NotesManifestRecord(BaseModel):
     split: str = Field(min_length=1)
     audio_path: Path
     reference_text: str = Field(min_length=1)
-    summary: str = Field(min_length=1)
+    # summary: str = Field(min_length=1)
     segments: list[NoteSegment] = Field(min_length=1)
     n_segments: int = Field(gt=0)
     duration_seconds: float = Field(gt=0)

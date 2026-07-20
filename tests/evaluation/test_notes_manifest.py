@@ -18,7 +18,7 @@ def make_record() -> dict[str, object]:
         "split": "test",
         "audio_path": "data/audio/record_001.flac",
         "reference_text": "Исходный текст выступления.",
-        "summary": "Краткая заметка по выступлению.",
+        # "summary": "Краткая заметка по выступлению.",
         "segments": [
             {
                 "segment_id": "record_001_0000",
@@ -56,7 +56,9 @@ def test_load_notes_manifest_returns_valid_records(
 
     assert len(records) == 1
     assert records[0].id == "record_001"
-    assert records[0].summary == "Краткая заметка по выступлению."
+    # assert records[0].summary == "Краткая заметка по выступлению."
+    assert records[0].reference_text == "Исходный текст выступления."
+    assert records[0].segments[0].segment_id == "record_001_0000"
 
 
 def test_load_notes_manifest_rejects_missing_file(
@@ -101,6 +103,7 @@ def test_load_notes_manifest_rejects_invalid_record(
     manifest_path = tmp_path / "notes.jsonl"
     record = make_record()
     record["summary"] = ""
+    record["reference_text"] = ""
     write_jsonl(manifest_path, [record])
 
     with pytest.raises(
