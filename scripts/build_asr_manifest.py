@@ -46,7 +46,7 @@ def main() -> None:
                 "id": f"cv_ru_{args.split}_{index:04d}",
                 "source": "Mozilla Common Voice Russian",
                 "split": args.split,
-                "audio_path": str(Path("data/external/common_voice_ru") / args.cv_dir.name / "clips" / row["path"]),
+                "audio_path": (args.cv_dir / "clips" / row["path"]).as_posix(),
                 "reference_text": row["sentence"],
             }
             file.write(json.dumps(record, ensure_ascii=False) + "\n")
